@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Message from '../components/Message';
 import Loader from '../components/Loader';
 
 const AdminProfilePage = () => {
@@ -9,7 +8,7 @@ const AdminProfilePage = () => {
   const { adminInfo } = useSelector((state) => state.adminLogin);
   const admin = adminInfo?.admin;
 
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   useEffect(() => {
     if (!admin) {

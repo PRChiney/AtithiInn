@@ -25,9 +25,9 @@ export const login = (email, password) => async (dispatch) => {
       if (healthCheck.data?.status !== 'UP') {
         throw new Error('Backend service unavailable');
       }
-    } catch (healthError) {
-      throw new Error('Cannot connect to backend server. Please ensure it is running.');
-    }
+    } catch {
+  throw new Error('Cannot connect to backend server. Please ensure it is running.');
+}
 
     if (!email?.trim() || !password?.trim()) {
       throw new Error('Email and password are required');

@@ -1,19 +1,12 @@
-import axios from 'axios';
 import API from '../services/api';
 import {
   ROOM_LIST_REQUEST,
   ROOM_LIST_SUCCESS,
   ROOM_LIST_FAIL,
-  ROOM_CREATE_REQUEST,
-  ROOM_CREATE_SUCCESS,
-  ROOM_CREATE_FAIL,
   ROOM_DELETE_REQUEST,
   ROOM_DELETE_SUCCESS,
   ROOM_DELETE_FAIL,
 } from '../constants/roomConstants';
-
-const API_URL = process.env.REACT_APP_API_URL || '/api';
-
 
 export const listRooms = (params = {}) => async (dispatch, getState) => {
   try {
@@ -99,8 +92,8 @@ export const updateRoom = (id, roomData) => async (dispatch, getState) => {
     const { adminLogin: { adminInfo } = {}, userLogin: { userInfo } = {} } = getState();
     const token = adminInfo?.token || userInfo?.token;
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const { data } = await API.put(`/rooms/${id}`, roomData, config);
-    dispatch(listRooms());
+    await API.put(`/rooms/${id}`, roomData, config);
+dispatch(listRooms());
   } catch (error) {
     console.error(error);
   }

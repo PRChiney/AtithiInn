@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -28,12 +29,18 @@ const Layout = ({ children }) => (
   </>
 );
 
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 const PrivateRoute = ({ children }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
   return userInfo ? children : <Navigate to="/login" />;
 };
 
+PrivateRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 class ErrorBoundary extends React.Component {
   state = { hasError: false, error: null };
@@ -68,6 +75,10 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node,
+};
 
 // Define routes
 const router = createBrowserRouter(

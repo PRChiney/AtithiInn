@@ -353,9 +353,8 @@ export const updateUser = (id, userData) => async (dispatch, getState) => {
     const { adminLogin: { adminInfo } = {}, userLogin: { userInfo } = {} } = getState();
     const token = adminInfo?.token || userInfo?.token;
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const { data } = await API.put(`/users/${id}`, userData, config);
-
-    dispatch(listUsers());
+   await API.put(`/users/${id}`, userData, config);
+dispatch(listUsers());
   } catch (error) {
 
     console.error(error);

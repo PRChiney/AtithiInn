@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/authActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
 import Meta from '../components/Meta';
 
 const LoginPage = () => {

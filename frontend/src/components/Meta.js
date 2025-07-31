@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet-async';
 
 const Meta = ({
@@ -29,6 +31,14 @@ const Meta = ({
       {image && <meta name="twitter:image" content={image} />}
     </Helmet>
   );
+};
+
+Meta.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  keywords: PropTypes.string,
+  author: PropTypes.string,
+  image: PropTypes.string,
 };
 
 export default Meta;

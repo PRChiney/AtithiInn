@@ -1,4 +1,3 @@
-import axios from 'axios';
 import API from '../services/api'; // Adjust path to where your axios instance file is saved
 import {
   HOTEL_LIST_REQUEST,
@@ -124,8 +123,8 @@ export const updateHotel = (id, hotelData) => async (dispatch, getState) => {
     const { adminLogin: { adminInfo } = {}, userLogin: { userInfo } = {} } = getState();
     const token = adminInfo?.token || userInfo?.token;
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const { data } = await API.put(`/hotels/${id}`, hotelData, config);
-    dispatch(listHotels());
+    await API.put(`/hotels/${id}`, hotelData, config);
+dispatch(listHotels());
   } catch (error) {
     console.error(error);
   }

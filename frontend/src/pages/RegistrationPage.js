@@ -36,7 +36,7 @@ const RegistrationPage = () => {
           setBackendStatus('unhealthy');
           setError('Backend service is unavailable. Please try again later.');
         }
-      } catch (err) {
+      } catch {
         setBackendStatus('unreachable');
         setError('Cannot connect to backend server. Please ensure it is running.');
       }

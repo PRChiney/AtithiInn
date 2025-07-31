@@ -123,9 +123,7 @@ export const logout = async () => {
     console.error('Logout Service Error:', error);
     throw error;
   } finally {
- 
     localStorage.removeItem('userInfo');
-
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   }
 };
@@ -138,7 +136,7 @@ export const checkAuth = () => {
   try {
     const parsedInfo = JSON.parse(userInfo);
     return !!parsedInfo?.token;
-  } catch (error) {
+  } catch {
     return false;
   }
 };

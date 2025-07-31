@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Loader({ color = 'blue', size = '12' }) {
+function Loader({ color = 'blue' }) {
   return (
     <div className="flex justify-center items-center h-32">
       <div className={`w-1/2 h-2 bg-gray-200 rounded-full overflow-hidden`}>
@@ -15,7 +16,6 @@ function Loader({ color = 'blue', size = '12' }) {
         ></div>
       </div>
 
-      {/* Tailwind custom animation */}
       <style>
         {`
           @keyframes progress {
@@ -34,5 +34,9 @@ function Loader({ color = 'blue', size = '12' }) {
     </div>
   );
 }
+
+Loader.propTypes = {
+  color: PropTypes.string,
+};
 
 export default Loader;

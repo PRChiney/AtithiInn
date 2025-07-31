@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const RoomSelection = ({ rooms = [], selectedRooms = [], setSelectedRooms }) => {
   const handleSelect = (roomId) => {
@@ -61,6 +62,12 @@ const RoomSelection = ({ rooms = [], selectedRooms = [], setSelectedRooms }) => 
       )}
     </div>
   );
+};
+
+RoomSelection.propTypes = {
+  rooms: PropTypes.array.isRequired,
+  selectedRooms: PropTypes.array.isRequired,
+  setSelectedRooms: PropTypes.func.isRequired,
 };
 
 export default RoomSelection;

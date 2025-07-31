@@ -22,7 +22,7 @@ export const registerAdmin = createAsyncThunk(
 
 export const loginAdmin = createAsyncThunk(
   'admin/login',
-  async ({ email, password }, { rejectWithValue, dispatch }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/api/admin/login', { email, password });
       

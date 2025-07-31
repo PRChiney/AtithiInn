@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Calendar } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -194,6 +195,24 @@ const HotelSearchPage = ({
       </div>
     </div>
   );
+};
+
+HotelSearchPage.propTypes = {
+  destination: PropTypes.string.isRequired,
+  setDestination: PropTypes.func.isRequired,
+  dateRange: PropTypes.shape({
+    startDate: PropTypes.instanceOf(Date),
+    endDate: PropTypes.instanceOf(Date),
+    key: PropTypes.string,
+  }).isRequired,
+  setDateRange: PropTypes.func.isRequired,
+  guests: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  setGuests: PropTypes.func.isRequired,
+  minPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  setMinPrice: PropTypes.func.isRequired,
+  maxPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  setMaxPrice: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired,
 };
 
 export default HotelSearchPage;

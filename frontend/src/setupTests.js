@@ -1,6 +1,6 @@
-// src/setupTests.js
-import '@testing-library/jest-dom'; // for extended DOM assertions
-import { server } from './mocks/server'; // If you're using MSW (Mock Service Worker) for API mocking
+/* global beforeAll, afterEach, afterAll */
+import '@testing-library/jest-dom';
+import { server } from './mocks/server';
 
 // Set up a mock service worker (MSW) to handle API mocking if needed
 beforeAll(() => {

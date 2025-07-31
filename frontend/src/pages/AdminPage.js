@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   listUsers,
   deleteUser,
@@ -43,7 +44,7 @@ const AdminPage = () => {
 
   // Pagination state
   const [hotelPage, setHotelPage] = useState(1);
-  const [allHotels, setAllHotels] = useState([]);
+  const [setAllHotels] = useState([]);
   const [roomPage, setRoomPage] = useState(1);
   const [allRooms, setAllRooms] = useState([]);
   const [totalRoomPages, setTotalRoomPages] = useState(1);
@@ -124,7 +125,7 @@ const AdminPage = () => {
     try {
       const { data } = await API.get('/hotels/all');
       setAllHotelOptions(data.data || []);
-    } catch (err) {
+    } catch {
       setAllHotelOptions([]);
     }
   };
@@ -170,36 +171,39 @@ const AdminPage = () => {
     }
   };
 
-  const ModalCard = ({ title, children, onClose }) => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h3 className="text-xl font-bold mb-4">{title}</h3>
-        {children}
-      </div>
+const ModalCard = ({ title, children }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <h3 className="text-xl font-bold mb-4">{title}</h3>
+      {children}
     </div>
-  );
+  </div>
+);
 
-  const Input = (props) => (
-    <input
-      {...props}
-      className="mb-2 w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-  );
+ModalCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
-  const ModalActions = ({ onCancel, submitLabel }) => (
-    <div className="flex justify-end mt-4">
-      <button
-        type="button"
-        onClick={onCancel}
-        className="mr-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-100"
-      >
-        Cancel
-      </button>
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-        {submitLabel}
-      </button>
-    </div>
-  );
+const ModalActions = ({ onCancel, submitLabel }) => (
+  <div className="flex justify-end mt-4">
+    <button
+      type="button"
+      onClick={onCancel}
+      className="mr-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-100"
+    >
+      Cancel
+    </button>
+    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+      {submitLabel}
+    </button>
+  </div>
+);
+
+ModalActions.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  submitLabel: PropTypes.string.isRequired,
+};
 
 
 
@@ -526,9 +530,9 @@ const AdminPage = () => {
               dispatch(listUsers());
             }}
           >
-            <Input name="username" placeholder="Username" required />
-            <Input name="email" type="email" placeholder="Email" required />
-            <Input name="password" type="password" placeholder="Password" required />
+            <input name="username" placeholder="Username" required className="w-full border p-2 mb-2 rounded" />
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password" required />
             <ModalActions onCancel={() => setShowAddUserModal(false)} submitLabel="Add" />
           </form>
         </ModalCard>
@@ -548,8 +552,8 @@ const AdminPage = () => {
               dispatch(listUsers());
             }}
           >
-            <Input name="username" defaultValue={editUser.username} required />
-            <Input name="email" type="email" defaultValue={editUser.email} required />
+            <input name="username" defaultValue={editUser.username} required />
+            <input name="email" type="email" defaultValue={editUser.email} required />
             <ModalActions onCancel={() => setEditUser(null)} submitLabel="Save" />
           </form>
         </ModalCard>
@@ -591,15 +595,15 @@ const AdminPage = () => {
               dispatch(listHotels({ page: 1 }));
             }}
           >
-            <Input name="name" placeholder="Hotel Name" required />
-            <Input name="description" placeholder="Description" required />
-            <Input name="city" placeholder="City" required />
-            <Input name="address" placeholder="Address" required />
-            <Input name="photos" placeholder="Photo URLs (comma separated)" required />
-            <Input name="rating" type="number" min="0" max="5" step="0.1" placeholder="Rating" required />
-            <Input name="numReviews" type="number" min="0" placeholder="Number of Reviews" required />
-            <Input name="amenities" placeholder="Amenities (comma separated)" required />
-            <Input name="cheapestPrice" type="number" min="0" placeholder="Cheapest Price" required />
+            <input name="name" placeholder="Hotel Name" required />
+            <input name="description" placeholder="Description" required />
+            <input name="city" placeholder="City" required />
+            <input name="address" placeholder="Address" required />
+            <input name="photos" placeholder="Photo URLs (comma separated)" required />
+            <input name="rating" type="number" min="0" max="5" step="0.1" placeholder="Rating" required />
+            <input name="numReviews" type="number" min="0" placeholder="Number of Reviews" required />
+            <input name="amenities" placeholder="Amenities (comma separated)" required />
+            <input name="cheapestPrice" type="number" min="0" placeholder="Cheapest Price" required />
             <ModalActions onCancel={() => setShowAddHotelModal(false)} submitLabel="Add" />
           </form>
         </ModalCard>
@@ -645,11 +649,11 @@ const AdminPage = () => {
               dispatch(listHotels({ page: 1 }));
             }}
           >
-            <Input name="name" defaultValue={editHotel.name} required />
-            <Input name="description" defaultValue={editHotel.description} required />
-            <Input name="city" defaultValue={editHotel.city} required />
-            <Input name="address" defaultValue={editHotel.address} required />
-            <Input
+            <input name="name" defaultValue={editHotel.name} required />
+            <input name="description" defaultValue={editHotel.description} required />
+            <input name="city" defaultValue={editHotel.city} required />
+            <input name="address" defaultValue={editHotel.address} required />
+            <input
               name="photos"
               defaultValue={editHotel.photos?.join(', ') || ''}
               required
@@ -667,10 +671,10 @@ const AdminPage = () => {
                 onError={e => { e.target.src = '/atithi_logo.png'; }}
               />
             )}
-            <Input name="rating" type="number" defaultValue={editHotel.rating} required />
-            <Input name="numReviews" type="number" defaultValue={editHotel.numReviews} required />
-            <Input name="amenities" defaultValue={editHotel.amenities?.join(', ') || ''} required />
-            <Input name="cheapestPrice" type="number" defaultValue={editHotel.cheapestPrice} required />
+            <inpu name="rating" type="number" defaultValue={editHotel.rating} required />
+            <inpu name="numReviews" type="number" defaultValue={editHotel.numReviews} required />
+            <input name="amenities" defaultValue={editHotel.amenities?.join(', ') || ''} required />
+            <inpu name="cheapestPrice" type="number" defaultValue={editHotel.cheapestPrice} required />
             <ModalActions onCancel={() => setEditHotel(null)} submitLabel="Save" />
           </form>
         </ModalCard>
@@ -699,12 +703,12 @@ const AdminPage = () => {
               dispatch(listRooms({ page: 1 }));
             }}
           >
-            <Input name="title" placeholder="Room Title" required />
-            <Input name="price" type="number" placeholder="Price" required />
-            <Input name="maxPeople" type="number" placeholder="Max People" required />
-            <Input name="description" placeholder="Description" required />
-            <Input name="image" placeholder="Image URL or base64" required />
-            <Input name="roomNumbers" placeholder="Room Numbers (comma separated)" required />
+            <input name="title" placeholder="Room Title" required />
+            <input name="price" type="number" placeholder="Price" required />
+            <input name="maxPeople" type="number" placeholder="Max People" required />
+            <input name="description" placeholder="Description" required />
+            <input name="image" placeholder="Image URL or base64" required />
+            <input name="roomNumbers" placeholder="Room Numbers (comma separated)" required />
             <select name="hotel" required className="w-full border p-2 mb-2 rounded">
               <option value="">Select Hotel</option>
               {allHotelOptions.map((hotel) => (
@@ -741,12 +745,12 @@ const AdminPage = () => {
               dispatch(listRooms({ page: 1 }));
             }}
           >
-            <Input name="title" defaultValue={editRoom.title} required />
-            <Input name="price" type="number" defaultValue={editRoom.price} required />
-            <Input name="maxPeople" type="number" defaultValue={editRoom.maxPeople} required />
-            <Input name="description" defaultValue={editRoom.description} required />
-            <Input name="image" defaultValue={editRoom.image} required />
-            <Input name="roomNumbers" defaultValue={editRoom.roomNumbers?.join(', ') || ''} required />
+            <input name="title" defaultValue={editRoom.title} required />
+            <input name="price" type="number" defaultValue={editRoom.price} required />
+            <input name="maxPeople" type="number" defaultValue={editRoom.maxPeople} required />
+            <input name="description" defaultValue={editRoom.description} required />
+            <input name="image" defaultValue={editRoom.image} required />
+            <input name="roomNumbers" defaultValue={editRoom.roomNumbers?.join(', ') || ''} required />
             <select name="hotel" defaultValue={editRoom.hotel} required className="w-full border p-2 mb-2 rounded">
               <option value="">Select Hotel</option>
               {allHotelOptions.map((hotel) => (

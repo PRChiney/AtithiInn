@@ -5,6 +5,7 @@ import { getUserDetails } from '../actions/userActions';
 import { listMyBookings } from '../actions/bookingActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import PropTypes from 'prop-types';
 import { FaUserCircle, FaHotel, FaCalendarAlt, FaUsers, FaMoneyBillWave } from 'react-icons/fa';
 
 
@@ -200,5 +201,30 @@ const DetailItem = ({ icon, label, value, capitalize = false }) => (
     </div>
   </div>
 );
+
+BookingCard.propTypes = {
+  booking: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    hotel: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    createdAt: PropTypes.string,
+    totalPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    checkIn: PropTypes.string,
+    checkInDate: PropTypes.string,
+    checkOut: PropTypes.string,
+    checkOutDate: PropTypes.string,
+    status: PropTypes.string,
+    guests: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }).isRequired,
+};
+
+// After DetailItem definition
+DetailItem.propTypes = {
+  icon: PropTypes.node,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  capitalize: PropTypes.bool,
+};
 
 export default ProfilePage;

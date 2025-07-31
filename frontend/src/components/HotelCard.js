@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function HotelCard({ hotel }) {
   return (
     <div className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       <Link to={`/property/${hotel._id}`}>
-        {/* Displaying a fallback image if hotel.photos[0] is unavailable */}
         <img 
           src={hotel.photos[0] || 'https://via.placeholder.com/400x300'} 
           alt={hotel.name} 
@@ -16,7 +16,6 @@ function HotelCard({ hotel }) {
           <p className="text-gray-600">{hotel.city}</p>
           <p className="mt-2 font-semibold">${hotel.cheapestPrice} / night</p>
           <div className="flex items-center mt-2">
-            {/* Rating Section with Stars */}
             <div className="flex items-center space-x-1">
               {Array.from({ length: 5 }, (_, index) => (
                 <svg
@@ -40,5 +39,17 @@ function HotelCard({ hotel }) {
     </div>
   );
 }
+
+HotelCard.propTypes = {
+  hotel: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    photos: PropTypes.arrayOf(PropTypes.string),
+    name: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    cheapestPrice: PropTypes.number.isRequired,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+  }).isRequired,
+};
 
 export default HotelCard;

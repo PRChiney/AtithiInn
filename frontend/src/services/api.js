@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000',
+  baseURL: process.env.REACT_APP_API_BASE_URL,
   timeout: 60000,
   withCredentials: true,
   headers: {
@@ -12,7 +12,6 @@ const API = axios.create({
 
 const checkBackendConnection = async () => {
   try {
-
     await API.get('/health', { timeout: 3000 });
     return true;
   } catch (error) {
@@ -21,10 +20,8 @@ const checkBackendConnection = async () => {
   }
 };
 
-
 API.interceptors.request.use(
   (config) => {
- 
     const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
     if (adminInfo?.token) {
       config.headers.Authorization = `Bearer ${adminInfo.token}`;
@@ -40,17 +37,14 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-
 API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const isConnected = await checkBackendConnection();
-    
     if (!isConnected) {
       error.message = 'Backend server is not available. Please try again later.';
       error.isConnectionError = true;
     }
-
     return Promise.reject(error);
   }
 );
