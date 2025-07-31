@@ -1,0 +1,85 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:wght@400;500;700&display=swap');
+
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global body styles */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; /* Custom font for body text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f8f8; /* Optional background color */
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+/* Loading Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite; /* Infinite spinning animation */
+}
+
+/* Custom Form Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+  @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent;
+}
+
+/* Primary Button */
+.btn-primary {
+  @apply bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition-colors duration-200;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  @apply bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition-colors duration-200;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-white rounded-lg shadow-md overflow-hidden;
+}
+
+/* Alert Styles */
+.alert-error {
+  @apply bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4;
+}
+
+.alert-success {
+  @apply bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4;
+}
