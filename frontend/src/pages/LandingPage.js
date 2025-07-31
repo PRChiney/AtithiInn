@@ -22,22 +22,29 @@ const LandingPage = () => {
   const [maxPrice, setMaxPrice] = useState('');
   const [isDefaultHotels, setIsDefaultHotels] = useState(true);
 
-  useEffect(() => {
-
-    if (!destination.trim()) {
-      dispatch(
-        listHotels({
-          city: '',
-          startDate: dateRange.startDate.toISOString(),
-          endDate: dateRange.endDate.toISOString(),
-          guests,
-          minPrice,
-          maxPrice,
-        })
-      );
-      setIsDefaultHotels(true);
-    }
-  }, [dispatch]);
+useEffect(() => {
+  if (!destination.trim()) {
+    dispatch(
+      listHotels({
+        city: '',
+        startDate: dateRange.startDate.toISOString(),
+        endDate: dateRange.endDate.toISOString(),
+        guests,
+        minPrice,
+        maxPrice,
+      })
+    );
+    setIsDefaultHotels(true);
+  }
+}, [
+  dispatch,
+  destination,
+  dateRange.startDate,
+  dateRange.endDate,
+  guests,
+  minPrice,
+  maxPrice,
+]);
 
   useEffect(() => {
     if (destination.trim()) {

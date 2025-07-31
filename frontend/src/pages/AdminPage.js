@@ -101,8 +101,8 @@ const AdminPage = () => {
   }, [dispatch, hotelPage]);
 
   useEffect(() => {
-    setAllHotels(hotels || []);
-  }, [hotels]);
+  setAllHotels(hotels || []);
+}, [hotels, setAllHotels]);
 
   // Rooms pagination
   useEffect(() => {
