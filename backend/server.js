@@ -44,7 +44,6 @@ const app = express();
 
 // Middleware
 app.use(morgan('tiny'));
-const cors = require('cors');
 
 app.use(cors({
   origin: [
