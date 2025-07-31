@@ -63,6 +63,9 @@ app.get('/api/v1/health', (req, res) => {
   res.status(200).json({ success: true, message: 'API is healthy 🚀', status: 'UP' });
 });
 
+app.get('/', (req, res) => {
+  res.send('AtithiInn API is running!');
+});
 
 // 404 handler
 app.all('*', (req, res) => {
