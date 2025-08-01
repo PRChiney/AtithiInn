@@ -7,12 +7,11 @@ import validator from 'validator';
 // @desc    Register a new user
 
 export const registerUser = asyncHandler(async (req, res, next) => {
-  const { name, email, password } = req.body;
-
+const { name, email, password } = req.body;
   // Validate input
-  if (!name || !email || !password) {
-    return next(new ErrorResponse('Please provide all required fields', 400));
-  }
+ if (!username || !email || !password) {
+  return next(new ErrorResponse('Please provide all required fields', 400));
+}
 
   if (!validator.isEmail(email)) {
     return next(new ErrorResponse('Please provide a valid email', 400));
@@ -29,11 +28,11 @@ export const registerUser = asyncHandler(async (req, res, next) => {
   }
 
 
-  const user = await User.create({
-    username: name,
-    email,
-    password,
-  });
+ const user = await User.create({
+  username: name,
+  email,
+  password,
+});
 
   res.status(201).json({
     success: true,
