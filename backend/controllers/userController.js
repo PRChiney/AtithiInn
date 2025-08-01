@@ -7,11 +7,12 @@ import validator from 'validator';
 // @desc    Register a new user
 
 export const registerUser = asyncHandler(async (req, res, next) => {
-const { name, email, password } = req.body;
+  const { username, email, password } = req.body; // <-- use username
+
   // Validate input
- if (!username || !email || !password) {
-  return next(new ErrorResponse('Please provide all required fields', 400));
-}
+  if (!username || !email || !password) {
+    return next(new ErrorResponse('Please provide all required fields', 400));
+  }
 
   if (!validator.isEmail(email)) {
     return next(new ErrorResponse('Please provide a valid email', 400));
@@ -21,18 +22,16 @@ const { name, email, password } = req.body;
     return next(new ErrorResponse('Password must be at least 8 characters long', 400));
   }
 
-
   const userExists = await User.findOne({ email });
   if (userExists) {
     return next(new ErrorResponse('User already exists with this email', 400));
   }
 
-
- const user = await User.create({
-  username: name,
-  email,
-  password,
-});
+  const user = await User.create({
+    username, // <-- use username
+    email,
+    password,
+  });
 
   res.status(201).json({
     success: true,
