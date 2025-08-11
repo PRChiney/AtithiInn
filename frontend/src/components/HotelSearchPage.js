@@ -57,7 +57,7 @@ const HotelSearchPage = ({
   return (
     <div className="relative w-full h-[500px] md:h-[400px] mt-16 md:mt-0">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 w-full h-full"
         style={{
           backgroundImage: "url('https://png.pngtree.com/background/20250107/original/pngtree-exotic-coastline-with-lush-palm-trees-and-serene-ocean-view-picture-image_16034469.jpg')",
@@ -66,28 +66,34 @@ const HotelSearchPage = ({
           backgroundRepeat: 'no-repeat',
         }}
       />
-      
+
       {/* Text Overlay */}
       <div className="absolute top-1/4 left-0 right-0 text-center z-10">
         <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
           𝒸𝒽ℴℴ𝓈ℯ 𝓎ℴ�𝓊𝓇 𝒹ℯ𝓈𝓉𝒾𝓃𝒶𝓉𝒾ℴ𝓃
         </h1>
       </div>
-      
+
       {/* Search Bar Container - Positioned at bottom */}
       <div className="absolute bottom-0 left-0 right-0 w-full max-w-7xl mx-auto px-4 pb-8">
-        <div className="bg-white shadow-lg rounded-2xl md:rounded-full flex flex-col md:flex-row items-center justify-between px-5 md:px-7 py-4 md:py-2 gap-4 p-2">
+        <div className="bg-white shadow-xl rounded-2xl md:rounded-full flex flex-col md:flex-row items-center justify-between px-5 md:px-7 py-4 md:py-2 gap-4 p-2 border border-gray-100">
           {/* Destination */}
-          <div className="w-full md:w-auto md:flex-1 min-w-0 border-b md:border-b-0 md:border-r border-gray-200 pb-3 md:pb-0 md:pr-4">
-            <label htmlFor="destination" className="block text-s font-semibold text-gray-500 mb-1">Where</label>
-            <input
-              id="destination"
-              type="text"
-              placeholder="Search destinations"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-              className="w-full bg-transparent text-sm md:text-base font-medium focus:outline-none placeholder:text-gray-400"
-            />
+          <div className="w-full md:w-auto md:flex-1 min-w-0 border-b md:border-b-0 md:border-r border-gray-200 pb-3 md:pb-0 md:pr-4 relative">
+            <label htmlFor="destination" className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">Where</label>
+            <div className="flex items-center">
+              <svg className="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <input
+                id="destination"
+                type="text"
+                placeholder="Search destinations"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                className="w-full bg-transparent text-sm md:text-base font-medium focus:outline-none placeholder:text-gray-400"
+              />
+            </div>
           </div>
 
           {/* Check-In */}
@@ -182,11 +188,11 @@ const HotelSearchPage = ({
           <div className="w-full md:w-auto mt-2 md:mt-0">
             <button
               onClick={handleSearch}
-              className="bg-gradient-to-r from-orange-400 to-red-500 text-white py-3 px-6 rounded-full transition duration-300 w-full md:w-auto flex items-center justify-center"
+              className="bg-gradient-to-r from-orange-400 to-red-500 text-white py-3 px-6 rounded-full transition duration-300 w-full md:w-auto flex items-center justify-center hover:shadow-lg hover:from-orange-500 hover:to-red-600 active:scale-95"
               aria-label="Search"
             >
-              <span className="md:hidden mr-2">Search</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span className="font-semibold">Search</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35M15 11a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </button>

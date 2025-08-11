@@ -64,3 +64,31 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   z-index: 1000;
 }
 
+@layer utilities {
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hotel-search-container {
+    height: 450px !important;
+  }
+  
+  .hotel-search-text {
+    font-size: 2rem !important;
+    top: 20% !important;
+  }
+}

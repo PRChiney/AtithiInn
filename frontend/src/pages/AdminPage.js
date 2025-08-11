@@ -44,7 +44,7 @@ const AdminPage = () => {
 
   // Pagination state
   const [hotelPage, setHotelPage] = useState(1);
-  const [setAllHotels] = useState([]);
+ const [allHotels, setAllHotels] = useState([]);
   const [roomPage, setRoomPage] = useState(1);
   const [allRooms, setAllRooms] = useState([]);
   const [totalRoomPages, setTotalRoomPages] = useState(1);
