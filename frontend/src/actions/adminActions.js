@@ -1,13 +1,13 @@
 //frontend/src/actions/adminActions.js
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import API from '../services/api';
 import { ADMIN_LOGOUT } from '../constants/adminConstants';
 
 export const registerAdmin = createAsyncThunk(
   'admin/register',
   async ({ name, email, password, secretKey }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/api/admin/register', {
+      const { data } = await API.post('/admin/register', {
         name,
         email,
         password,
@@ -24,7 +24,7 @@ export const loginAdmin = createAsyncThunk(
   'admin/login',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/api/admin/login', { email, password });
+      const { data } = await API.post('/admin/login', { email, password });
       
       const response = {
   admin: {
