@@ -44,7 +44,6 @@ const AdminPage = () => {
 
   // Pagination state
   const [hotelPage, setHotelPage] = useState(1);
- const [allHotels, setAllHotels] = useState([]);
   const [roomPage, setRoomPage] = useState(1);
   const [allRooms, setAllRooms] = useState([]);
   const [totalRoomPages, setTotalRoomPages] = useState(1);
@@ -99,11 +98,6 @@ const AdminPage = () => {
   useEffect(() => {
     dispatch(listHotels({ page: hotelPage }));
   }, [dispatch, hotelPage]);
-
-  useEffect(() => {
-  setAllHotels(hotels || []);
-}, [hotels, setAllHotels]);
-
   // Rooms pagination
   useEffect(() => {
     dispatch(listRooms({ page: roomPage }));
@@ -154,15 +148,14 @@ const AdminPage = () => {
         case 'hotel':
           await dispatch(deleteHotel(id));
           msg = 'Hotel deleted successfully!';
-          setHotelPage(1);         
-          setAllHotels([]);        
-          dispatch(listHotels({ page: 1 })); 
+          setHotelPage(1);
+          dispatch(listHotels({ page: 1 }));
           break;
         case 'room':
           await dispatch(deleteRoom(id));
           setAllRooms((prev) => prev.filter((room) => room._id !== id));
           msg = 'Room deleted successfully!';
-          dispatch(listRooms({ page: roomPage })); 
+          dispatch(listRooms({ page: roomPage }));
           break;
         default:
           break;
@@ -590,7 +583,6 @@ ModalActions.propTypes = {
               await dispatch(createHotel(hotelData));
               setShowAddHotelModal(false);
               setHotelPage(1);
-              setAllHotels([]);
               showSuccess('Hotel added successfully!');
               dispatch(listHotels({ page: 1 }));
             }}
@@ -644,7 +636,6 @@ ModalActions.propTypes = {
               await dispatch(updateHotel(editHotel._id, updatedHotel));
               setEditHotel(null);
               setHotelPage(1);
-              setAllHotels([]);
               showSuccess('Hotel updated successfully!');
               dispatch(listHotels({ page: 1 }));
             }}
